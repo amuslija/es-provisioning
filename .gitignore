@@ -1,0 +1,6 @@
+*
+
+!terraform
+!terraform/*
+!.gitignore
+!README.md
