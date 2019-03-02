@@ -15,8 +15,8 @@ These plans use AWS S3 as a backend for storing infrastructure state. From the `
 ```bash
   terraform init \
     -backend-config="bucket=<bucket_name>" \
-    -key="key=<key>" \
-    -region="region=<region>>
+    -backend-config="key=<key>" \
+    -backend-config="region=<region>"
 ```
 
 Afterwards, check what resources will be created using:

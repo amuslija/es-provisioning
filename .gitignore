@@ -1,6 +1,11 @@
 *
 
 !terraform
-!terraform/*
+!terraform/**
+!parser
+!parser/**
 !.gitignore
 !README.md
+
+parser/node_modules
+.terraform

@@ -11,6 +11,7 @@ module "es-vpc" {
 
   enable_nat_gateway = true
   enable_vpn_gateway = true
+  enable_dns_hostnames = true
 
   tags = {
     ElastiSearch = true
@@ -126,6 +127,26 @@ resource "aws_elasticsearch_domain" "es-cluster" {
   domain_name           = "${var.es_domain_name}"
   elasticsearch_version = "${var.es_version}"
 
+  access_policies = <<CONFIG
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "Service": "es.amazonaws.com"
+      },
+      "Action": [
+        "logs:PutLogEvents",
+        "logs:PutLogEventsBatch",
+        "logs:CreateLogStream"
+      ],
+      "Resource": "arn:aws:logs:*"
+    }
+  ]
+}
+CONFIG
+
   ebs_options {
     ebs_enabled = "${var.es_ebs_enabled}"
     volume_size = "${var.es_ebs_volume_size}"
@@ -137,11 +158,13 @@ resource "aws_elasticsearch_domain" "es-cluster" {
 
   cluster_config {
     instance_type = "${var.es_instance_type}"
+    instance_count = "${var.es_instance_count}"
+    zone_awareness_enabled = "${var.es_zone_awareness_enabled}"
   }
-
+  
   vpc_options {
     security_group_ids = ["${module.es-sg.this_security_group_id}"]
-    subnet_ids         = ["${module.es-vpc.private_subnets[0]}"]
+    subnet_ids         = ["${module.es-vpc.public_subnets}"]
   }
 
   log_publishing_options {

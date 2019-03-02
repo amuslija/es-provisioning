@@ -18,6 +18,18 @@ variable "es_instance_type" {
   description = "Instance type which will be used for the ElasticSearch cluster"
 }
 
+variable "es_instance_count" {
+  description = "Number of ElasticSearch instances in the cluster"
+}
+
+variable "es_zone_awareness_enabled" {
+  description = "Enable zone awareness, ensuring that instances are distributed over different AZs"
+}
+
+variable "es_automated_snapshot_start_hour" {
+  description = "When to create snapshot of existing ElasticSearch indices"
+}
+
 variable "es_version" {
   description = "ElasticSearch cluster version"
 }

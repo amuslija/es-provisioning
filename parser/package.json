@@ -1,0 +1,22 @@
+{
+  "name": "parser",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^5.15.0",
+    "prettier": "^1.16.4"
+  },
+  "bin": {
+    "parser": "bin/cli.js"
+  },
+  "dependencies": {
+    "commander": "^2.19.0",
+    "elasticsearch": "^15.4.1",
+    "fast-csv": "^2.4.1",
+    "file-type": "^10.8.0",
+    "lodash": "^4.17.11",
+    "read-chunk": "^3.0.0",
+    "uuid": "^3.3.2"
+  }
+}
